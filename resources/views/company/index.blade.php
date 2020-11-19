@@ -31,7 +31,7 @@
                               <td>{{$item->company_name}}</td>
                               <td>{{$item->email}}</td>
                               <td>{{$item->website}}</td>
-                              <td><img src="{{ asset($item->logo) }}" alt=""class="img-thumbnail"></td>
+                              <td><img src="{{ asset($item->logo) }}" alt=""class="img-thumbnail" style="width: 100px"></td>
 
                               
                               <td><form action="{{route('company.destroy',$item->id)}}" method="POST">

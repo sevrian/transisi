@@ -37,7 +37,7 @@
                         <label class="col-sm-2 col-form-label">Logo</label>
                         <div class="col-sm-10">
                         <input type="file" class="form-control-file"  name="logo">
-                        <label>*Max 2MB,100x100 px, png</label>
+                        <label>*max 2MB,min:100x100px,png</label>
                         </div>
                       </div>
                      <div class="form-group row">

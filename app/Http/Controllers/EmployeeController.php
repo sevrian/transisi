@@ -44,13 +44,13 @@ class EmployeeController extends Controller
             'company_id' => 'required',
 
         ]);
-        // $request->file('logo')->store('company');
+
 
         Employee::create([
             'employee_name' => $request->employee_name,
             'email' => $request->email,
             'company_id' => $request->company_id,
-            //    'logo' => $request->logo,
+
 
         ]);
         return redirect()->route('employee.index');
@@ -75,8 +75,9 @@ class EmployeeController extends Controller
      */
     public function edit($id)
     {
+        $company = Company::all();
         $employee = Employee::findorfail($id);
-        return view('employee.edit', compact('employee'));
+        return view('employee.edit', compact('employee', 'company'));
     }
 
     /**
@@ -92,15 +93,14 @@ class EmployeeController extends Controller
             'employee_name' => 'required',
             'email' => 'required',
             'company_id' => 'required',
-            // 'logo' => 'mimes:png|max:2000|required',
         ]);
         $data = [
-            'employee_name' => $request->company_name,
+            'employee_name' => $request->employee_name,
             'email' => $request->email,
             'company_id' => $request->company_id,
         ];
 
-        Company::whereId($id)->update($data);
+        Employee::whereId($id)->update($data);
         return redirect()->route('employee.index');
     }
 

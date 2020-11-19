@@ -5,51 +5,55 @@
 <div class="container">
     <div class="row justify-content-center">
         
-        <div class="col-md-12">
-            <div class="card">
-                <div class="card-header">
-                    Form Add Company
-                </div>
-                <div class="card-body">
-                  <form action="{{ route('company.update',$company->id)}}" method="POST" enctype="multipart/form-data">
-                     @csrf
-                     @method('PUT')
-                     <div class="form-group row">
-                        <label for="" class="col-sm-2 col-form-label">Comapany Name</label>
+      <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                Form Edit Employee
+            </div>
+            <div class="card-body">
+                <form action="{{ route('employee.update',$employee->id)}}" method="POST">
+                    @csrf
+                    @method('PUT')
+                    <div class="form-group row">
+                        <label for="" class="col-sm-2 col-form-label">Employee Name</label>
                         <div class="col-sm-10">
-                          <input type="text" class="form-control" name="company_name" value="{{$company->company_name}}">
+                            <input type="text" class="form-control" name="employee_name" value="{{$employee->employee_name}}">
                         </div>
-                      </div>
-                     <div class="form-group row">
-                       <label class="col-sm-2 col-form-label">Email</label>
-                       <div class="col-sm-10">
-                         <input type="email" class="form-control" name="email" value="{{$company->email}}">
-                       </div>
-                     </div>
-                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">Website</label>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Email</label>
                         <div class="col-sm-10">
-                          <input type="text" class="form-control" name="website" value="{{$company->website}}">
+                            <input type="email" class="form-control" name="email" value="{{$employee->email}}">
                         </div>
-                      
-                      </div>
-                     <div class="form-group row">
-                       
-                        <label class="col-sm-2 col-form-label">Logo</label>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Company</label>
                         <div class="col-sm-10">
-                        <input type="file" class="form-control-file"  name="logo">
-                        <label>*Max 2MB,100x100 px, png</label>
+                            <select class="custom-select" name="company_id" value="">
+                                
+                                @foreach ($company as $result)
+                                <option value="{{$result->id}}" 
+                                  @if ($result->id==$employee->campany_id )
+                                    selected
+                                @endif>
+                                  {{$result->company_name}}
+                                </option>
+
+                                @endforeach
+                            </select>
                         </div>
-                      </div>
-                     <div class="form-group row">
-                       <div class="col-sm-10">
-                         <button type="submit" class="btn btn-primary">Update</button>
-                       </div>
-                     </div>
-                   </form>
-                </div>
+
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-sm-10">
+                            <button type="submit" class="btn btn-primary">Save</button>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
+    </div>
 
     </div>
 </div>

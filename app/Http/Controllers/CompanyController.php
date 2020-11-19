@@ -96,15 +96,30 @@ class CompanyController extends Controller
             'company_name' => 'required',
             'email' => 'required',
             'website' => 'required',
-            // 'logo' => 'mimes:png|max:2000|required',
-        ]);
-        $data = [
-            'company_name' => $request->company_name,
-            'email' => $request->email,
-            'website' => $request->website,
-        ];
 
-        Company::whereId($id)->update($data);
+        ]);
+        $company = Company::findorfail($id);
+        if ($request->has('logo')) {
+            $logo = $request->logo;
+            $newlogo = time() . $logo->getClientOriginalName();
+            $logo->move('storage/app/company/', $newlogo);
+            $data = [
+                'company_name' => $request->company_name,
+                'email' => $request->email,
+                'website' => $request->website,
+                'logo' => 'storage/app/company/' . $newlogo
+            ];
+        } else {
+            $data = [
+                'company_name' => $request->company_name,
+                'email' => $request->email,
+                'website' => $request->website,
+            ];
+        }
+
+
+
+        $company->update($data);
         return redirect()->route('company.index');
     }
 
