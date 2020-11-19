@@ -40,18 +40,22 @@ class CompanyController extends Controller
             'company_name' => 'required|unique:company',
             'email' => 'required',
             'website' => 'required',
-            // 'logo' => 'mimes:png|max:2048|required',
+            'logo' => 'mimes:png|max:2048|required|dimensions:min_width=100,min_height=100',
         ]);
+
+        $logo = $request->logo;
+        $newlogo = time() . $logo->getClientOriginalName();
+
 
 
         Company::create([
             'company_name' => $request->company_name,
             'email' => $request->email,
             'website' => $request->website,
-            // 'logo' => $request->logo,
+            'logo' => 'storage/app/company/' . $newlogo
 
         ]);
-
+        $logo->move('storage/app/company/', $newlogo);
 
         return redirect()->route('company.index');
     }

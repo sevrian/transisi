@@ -19,6 +19,7 @@
                                 <th scope="col">Company Name</th>
                                 <th scope="col">Email</th>
                                 <th scope="col">Website</th>
+                                <th scope="col">Logo</th>
                                 <th scope="col">Action</th>
 
                             </tr>
@@ -30,6 +31,8 @@
                               <td>{{$item->company_name}}</td>
                               <td>{{$item->email}}</td>
                               <td>{{$item->website}}</td>
+                              <td><img src="{{ asset($item->logo) }}" alt=""class="img-thumbnail"></td>
+
                               
                               <td><form action="{{route('company.destroy',$item->id)}}" method="POST">
                                  @csrf
